@@ -1,18 +1,43 @@
+@font-face {
+    font-family: ShortStack;
+    src: url(ShortStack-Regular.ttf);
+}
+
+:root {
+    background-color: black;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
+.header {
+    height: 15vh;
+    line-height: 15vh;
+    font-family: ShortStack;
+    color: aqua;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 6rem;
+
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
-    width: 80vw;
-    height: 80vw;
+    width: 60vw;
+    height: 60vw;
     margin: auto;
+    align-content: flex-start;
 }
 
 .grid-item {
-    width: calc(80vw / 17);
-    height: calc(80vw / 17);
-    border: 1px solid black;
+    width: calc(60vw / 16);
+    height: calc(60vw / 16);
+    outline: 1px solid white;
+}
+
+.grid-item:hover {
+    background-color: aqua;
 }

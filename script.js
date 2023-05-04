@@ -1,3 +1,5 @@
+const header = document.querySelector('.header');
+header.textContent = "Etch-a-Sketch";
 
 const container = document.querySelector('.container');
 
