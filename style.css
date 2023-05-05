@@ -4,19 +4,21 @@
 }
 
 :root {
-    background-color: black;
+    --rootColor: black;
+    --squareColor: aqua;
 }
 
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--rootColor);
 }
 
 .header {
     height: 15vh;
     line-height: 15vh;
     font-family: ShortStack;
-    color: aqua;
+    color: var(--squareColor);
     text-align: center;
     font-weight: bolder;
     font-size: 6rem;
@@ -24,6 +26,12 @@ body {
 }
 
 .container {
+    display: flex;
+    width: 100vw;
+    height: 60vh;
+}
+
+.grid {
     display: flex;
     flex-wrap: wrap;
     width: 60vw;
@@ -33,11 +41,49 @@ body {
 }
 
 .grid-item {
+    /* width and height are calculated dynamically using DOM manipulation.*/
+    /*
     width: calc(60vw / 16);
     height: calc(60vw / 16);
+    */
+    background-color: var(--rootColor);
     outline: 1px solid white;
+    /*outline instead of border because it doesnt add 
+    to the overall size of the grid-item element. Instead 
+    the outline is placed on the interior of the elements border.*/
 }
 
-.grid-item:hover {
-    background-color: aqua;
+.inputPanel {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 60vw;
+    background-color: rgb(39, 39, 39);
+    margin: auto;
+    align-items: center;
+    justify-content: center;
 }
+
+.slider {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    background: var(--rootColor);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--squareColor);
+    cursor: pointer;
+    border-radius: 15px;
+
+}
+
+/* created same functionality but using DOM manipulation
+.grid-item:hover {
+    background-color: var(--squareColor);
+}
+*/
