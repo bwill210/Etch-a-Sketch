@@ -61,12 +61,28 @@ body {
     background-color: rgb(39, 39, 39);
     margin: auto;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    border-radius: 15px;
+}
+
+button {
+    height: 5vw;
+    width: 16vw;
+    border-radius: 8px;
+    background: var(--rootColor);
+    color: white;
+    cursor: pointer;
+
+}
+
+.slidecontainer {
+    width: 16vw;
 }
 
 .slider {
     -webkit-appearance: none;
-    height: 10px;
+    height: 1vw;
+    width: 16vw;
     border-radius: 5px;
     background: var(--rootColor);
 }

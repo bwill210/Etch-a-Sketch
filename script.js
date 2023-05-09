@@ -1,23 +1,28 @@
 let gridFull = false;
 let prevSquaresEachSide = 0;
+let gridStartSize = 30;
+let hoverColor = "aqua";
+let rootColor = "black";
 
-/*working on rerendering grid with each new slider input*/
+/*create grid or change grid resolution*/
 function populateGrid(grid, numSquaresEachSide) {
     if (gridFull == true) {
-        for (let i = 0; i < prevSquaresEachSide**2; i++){
-            grid.removeChild(gridItem);
-        };
+        while (grid.firstChild) {
+            grid.removeChild(grid.firstChild);
+        }
+        gridFull = false;
+        populateGrid(grid, numSquaresEachSide);
     }
     else {
         for (let i = 0; i < numSquaresEachSide**2; i++){
-            const gridItem = document.createElement('div');
+            let gridItem = document.createElement('div');
             gridItem.className = "grid-item";
             gridItem.style.width = "calc(60vw / "+numSquaresEachSide+")";
             gridItem.style.height = "calc(60vw / "+numSquaresEachSide+")";
             grid.appendChild(gridItem);
         };
-        let gridFull = true;
-        prevSquaresEachSide = numSquaresEachSide;
+        gridFull = true;
+        changeColorOnHover(hoverColor);
     }
 };
 
@@ -27,22 +32,26 @@ function changeColorOnHover(newColor) {
         square.addEventListener('mouseenter', () => {
             square.style.backgroundColor = newColor;
         });
-
-        square.addEventListener('mouseleave', () => {
-            square.style.backgroundColor = "black";
-        });
     });
 };
 
+function eraseGrid(rootColor) {
+    const squares = document.querySelectorAll(".grid-item");
+    squares.forEach((square) => {
+            square.style.backgroundColor = "black";
+        });
+    };
+
+
+/*Header content*/
 const header = document.querySelector('.header');
 header.textContent = "Etch-a-Sketch";
 
-const container = document.querySelector('.container');
-
 /*create grid element and append to container*/
+const container = document.querySelector('.container');
 const grid = document.createElement('div');
 grid.className = "grid";
-populateGrid(grid, 20);
+populateGrid(grid, gridStartSize);
 container.appendChild(grid);
 
 /*create inputPanel element and append to container*/
@@ -57,14 +66,25 @@ const slider = document.createElement('input');
 slider.className = "slider";
 slider.type = "range";
 slider.min = "10";
-slider.max = "100";
-slider.value = "55";
+slider.max = "50";
+slider.value = gridStartSize;
 slideContainer.appendChild(slider);
 inputPanel.appendChild(slideContainer);
 
+/*clear button*/
+const clearBtn = document.createElement('button');
+clearBtn.textContent = "Clear";
+inputPanel.appendChild(clearBtn);
+
+
+/*Event Listeners*/
 const input = document.querySelector('input');
 input.addEventListener("input", function () {
     populateGrid(grid, input.value);
 });
 
-changeColorOnHover("aqua");
+clearBtn.addEventListener("click", function () {
+    eraseGrid(rootColor);
+});
+
+changeColorOnHover(hoverColor);
