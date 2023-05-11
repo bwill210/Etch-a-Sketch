@@ -6,16 +6,22 @@
 :root {
     --rootColor: black;
     --squareColor: aqua;
+    height: 100vh;
+    width: 100%;
 }
 
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
     background-color: var(--rootColor);
 }
 
 .header {
-    height: 15vh;
+    min-height: 20vh;
     line-height: 15vh;
     font-family: ShortStack;
     color: var(--squareColor);
@@ -27,17 +33,17 @@ body {
 
 .container {
     display: flex;
+    justify-content: space-evenly;
     width: 100vw;
-    height: 60vh;
+    min-height: 60vh;
 }
 
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 60vw;
-    height: 60vw;
-    margin: auto;
-    align-content: flex-start;
+    width: 70vh;
+    height: 70vh;
+    /*margin: auto; */
 }
 
 .grid-item {
@@ -57,9 +63,9 @@ body {
     display: flex;
     flex-direction: column;
     width: 20vw;
-    height: 60vw;
+    height: 70vh;
     background-color: rgb(39, 39, 39);
-    margin: auto;
+    /*margin: auto; */
     align-items: center;
     justify-content: space-evenly;
     border-radius: 15px;
@@ -83,11 +89,12 @@ button {
     color: white;
     font-size: medium;
     text-align: center;
+    line-height: 18pt;
 }
 
 .slider {
     -webkit-appearance: none;
-    height: 1vw;
+    height: 1vh;
     width: 16vw;
     border-radius: 5px;
     background: var(--rootColor);

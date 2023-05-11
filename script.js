@@ -18,8 +18,8 @@ function populateGrid(grid, numSquaresEachSide) {
         for (let i = 0; i < numSquaresEachSide**2; i++){
             let gridItem = document.createElement('div');
             gridItem.className = "grid-item";
-            gridItem.style.width = "calc(60vw / "+numSquaresEachSide+")";
-            gridItem.style.height = "calc(60vw / "+numSquaresEachSide+")";
+            gridItem.style.width = "calc(70vh / "+numSquaresEachSide+")";
+            gridItem.style.height = "calc(70vh / "+numSquaresEachSide+")";
             grid.appendChild(gridItem);
         };
         gridFull = true;
