@@ -1,8 +1,9 @@
 let gridFull = false;
 let prevSquaresEachSide = 0;
 let gridStartSize = 30;
-let hoverColor = "aqua";
+let drawingColor = "aqua";
 let rootColor = "black";
+let isErasing = false;
 
 /*create grid or change grid resolution*/
 function populateGrid(grid, numSquaresEachSide) {
@@ -22,23 +23,28 @@ function populateGrid(grid, numSquaresEachSide) {
             grid.appendChild(gridItem);
         };
         gridFull = true;
-        changeColorOnHover(hoverColor);
+        draw(drawingColor);
     }
 };
 
-function changeColorOnHover(newColor) {
+function draw(newColor) {
     const squares = document.querySelectorAll(".grid-item");
     squares.forEach((square) => {
-        square.addEventListener('mouseenter', () => {
-            square.style.backgroundColor = newColor;
+        square.addEventListener('mouseover', evt => {
+            if (evt.buttons === 1) {
+                if (isErasing==false){
+                    square.style.backgroundColor = newColor;
+                }
+                else {square.style.backgroundColor = rootColor};
+            }
         });
     });
 };
 
-function eraseGrid(rootColor) {
+function clearGrid(rootColor) {
     const squares = document.querySelectorAll(".grid-item");
     squares.forEach((square) => {
-            square.style.backgroundColor = "black";
+            square.style.backgroundColor = rootColor;
         });
     };
 
@@ -68,23 +74,50 @@ slider.type = "range";
 slider.min = "10";
 slider.max = "50";
 slider.value = gridStartSize;
+slideContainer.textContent = slider.value + " x " + slider.value;
 slideContainer.appendChild(slider);
 inputPanel.appendChild(slideContainer);
+
+/*draw button*/
+const drawBtn = document.createElement('button');
+drawBtn.textContent = "Draw";
+drawBtn.classList.add("buttonInUse");
+inputPanel.appendChild(drawBtn);
+
+/*erase button*/
+const eraseBtn = document.createElement('button');
+eraseBtn.textContent = "Erase";
+inputPanel.appendChild(eraseBtn);
 
 /*clear button*/
 const clearBtn = document.createElement('button');
 clearBtn.textContent = "Clear";
 inputPanel.appendChild(clearBtn);
 
-
 /*Event Listeners*/
 const input = document.querySelector('input');
 input.addEventListener("input", function () {
     populateGrid(grid, input.value);
 });
+input.addEventListener("mouseup", () => {
+    slideContainer.textContent = slider.value + " x " + slider.value;
+    slideContainer.appendChild(slider);
+})
 
-clearBtn.addEventListener("click", function () {
-    eraseGrid(rootColor);
+drawBtn.addEventListener("click", () => {
+    isErasing = false;
+    drawBtn.classList.add('buttonInUse');
+    eraseBtn.classList.remove("buttonInUse");
 });
 
-changeColorOnHover(hoverColor);
+eraseBtn.addEventListener("click", () => {
+    isErasing = true;
+    drawBtn.classList.remove('buttonInUse');
+    eraseBtn.classList.add("buttonInUse");
+});
+
+clearBtn.addEventListener("click", function () {
+    clearGrid(rootColor);
+});
+
+draw(drawingColor);

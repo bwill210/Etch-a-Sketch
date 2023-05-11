@@ -61,7 +61,7 @@ body {
     background-color: rgb(39, 39, 39);
     margin: auto;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     border-radius: 15px;
 }
 
@@ -72,11 +72,17 @@ button {
     background: var(--rootColor);
     color: white;
     cursor: pointer;
+}
 
+.buttonInUse {
+    border-color: aqua;
 }
 
 .slidecontainer {
     width: 16vw;
+    color: white;
+    font-size: medium;
+    text-align: center;
 }
 
 .slider {
